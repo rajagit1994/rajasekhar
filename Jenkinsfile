@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage( clone the repo){
             steps{
-                git 'https://github.com/rajagit1994/rajasekhar.git'
+                git branch: 'main', url: 'https://github.com/rajagit1994/rajasekhar.git'
             }
         }
     }
