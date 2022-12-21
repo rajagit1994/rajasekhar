@@ -4,6 +4,6 @@
 
 FROM ubuntu:18.04
 RUN apt update && apt install openjdk-8-jdk -y && apt install wget -y
-RUN . ./
+COPY /var/lib/jenkins/workspace/hello-world -CI/webapp/target/*.war .
 # EXPOSE 8080
 CMD ["java", "-jar", "spring.war"]
