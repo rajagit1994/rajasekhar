@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    tools {
+        maven 'maven'
+}
+
     stages{
         stage( 'clone the repo'){
             steps{
@@ -8,14 +12,9 @@ pipeline{
         }
         stage( 'build the code'){
             steps{
-                git branch: 'main', url: 'https://github.com/rajagit1994/rajasekhar.git'
+                sh 'mvn clean install'
             }
         }
-        stage( 'docker build'){
-            steps{
-                sh 'docker build -t one .'
-                sh 'docker tag one:123'
-            }
-        }
+        
     }
 }
