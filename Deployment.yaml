@@ -1,20 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  deploy
-  namespace: default
+  name: hello
   labels:
-    app:  MYAPP
+    app: hello
 spec:
   selector:
     matchLabels:
-      app: MYAPP
-  replicas: 1
+      app: hello
+      
   template:
     metadata:
       labels:
-        app:  MYAPP
+        app: hello
+        tier: hello
     spec:
       containers:
-      - name:  nginx
-        image:  nginx
+        - name: hello
+          image: nginx
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+            name: hello
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: hello
+    tier: hello
+  type: LoadBalancer
